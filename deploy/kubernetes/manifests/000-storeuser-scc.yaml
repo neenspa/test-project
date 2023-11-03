@@ -1,0 +1,53 @@
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: test-project-scc-storeuser
+  labels:
+    backstage.io/kubernetes-id: test-project
+    app.kubernetes.io/name: test-project
+    rht-gitops.com/janus-argocd: test-project
+allowHostPID: false
+allowHostNetwork: false
+allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+runAsUser:
+  type: MustRunAs
+  uid: 10001
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:test-ns1010:storeuser-sa
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: test-project-scc-storeuseradmin
+  annotations:
+    backstage.io/kubernetes-id: test-project
+allowHostPID: false
+allowHostNetwork: false
+allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:test-ns1010:storeuseradmin-sa

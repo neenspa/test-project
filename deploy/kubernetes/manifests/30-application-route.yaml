@@ -1,0 +1,21 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: shop-frontend-nb
+  namespace: test-ns1010
+  labels:
+    name: front-end
+    backstage.io/kubernetes-id: test-project
+    app.kubernetes.io/name: test-project
+    rht-gitops.com/janus-argocd: test-project
+spec:
+  #host:
+  to:
+    kind: Service
+    name: front-end
+    weight: 100
+  port:
+    targetPort: 8079
+  wildcardPolicy: None
+  tls:
+    termination: edge
